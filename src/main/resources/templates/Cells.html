@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ячейки</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/goInd}">Даосизм</a>
+        <form class="d-flex" th:action="@{/GetCell}" method="get">
+            <input class="form-control me-2" type="search" placeholder="Поиск по хэшу" name="article" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Найти</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>Ячейки</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Уровень</th>
+            <th>Уникальный код</th>
+            <th>Склад</th>
+            <th>Продукт в ячейке</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cell : ${cells}">
+            <td th:text="${cell.getId()}"></td>
+            <td th:text="${cell.getName()}"></td>
+            <td th:text="${cell.getLevel()}"></td>
+            <td th:text="${cell.getHash()}"></td>
+            <td th:text="${cell.getLoc().getAddress()}"></td>
+            <td th:text="${cell.getProduct().getArticle()}"></td>
+            <td>
+                <form th:action="@{/UpdateCell/{cellId}(cellId=${cell.getId()})}" method="get">
+                    <button class="btn btn-success" type="submit">Изменить</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/deleteCell/{cellId}(cellId=${cell.getId()})}" method="get">
+                    <button class="btn btn-danger" type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container mt-4">
+    <h2>Поля для заполнения</h2>
+    <form th:action="@{/AddCell}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Название ячейки</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="level" class="form-label">Уровень</label>
+            <input type="number" class="form-control" id="level" name="level" required>
+        </div>
+        <div class="mb-3">
+            <label for="hash" class="form-label">Уникальный код</label>
+            <input type="text" class="form-control" id="hash" name="hash">
+        </div>
+        <div class="mb-3">
+            <label for="loc" class="form-label">Склад</label>
+            <input type="text" class="form-control" id="loc" name="loc">
+        </div>
+        <div class="mb-3">
+            <label for="product" class="form-label">Продукт</label>
+            <input type="text" class="form-control" id="product" name="product">
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+
+<footer>
+    <div class="mb-3"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Продукт</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/goIndex}">Даосизм</a>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h2>Поля для изменения модельки</h2>
+    <form th:action="@{/updateProduct}" method="post">
+        <div class="mb-3">
+            <label for="id1" class="form-label">Номер продукта</label>
+            <input type="text" class="form-control" id="id1" name="id1" th:value="*{id1}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="name1" class="form-label">Название продукта</label>
+            <input type="text" class="form-control" id="name1" name="name1" th:value="*{name1}">
+        </div>
+        <div class="mb-3">
+            <label for="article1" class="form-label">Артикул</label>
+            <input type="text" class="form-control" id="article1" name="article1" th:value="*{article1}">
+        </div>
+        <div class="mb-3">
+            <label for="owner1" class="form-label">Производитель</label>
+            <input type="text" class="form-control" id="owner1" name="owner1" th:value="*{owner1}">
+        </div>
+        <div class="mb-3">
+            <label for="quantity1" class="form-label">Количество</label>
+            <input type="number" class="form-control" id="quantity1" name="quantity1" th:value="*{quantity1}" required>
+        </div>
+        <div class="mb-3">
+            <label for="price1" class="form-label">Цена</label>
+            <input type="number" class="form-control" id="price1" name="price1" th:value="*{price1}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+</div>
+</body>
+</html>

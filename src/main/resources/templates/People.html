@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Человеки</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/goInde}">Даосизм</a>
+        <form class="d-flex" th:action="@{GetPerson}" method="get">
+            <input class="form-control me-2" type="search" name="personId" placeholder="Поиск" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Найти</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>Человеки</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Семейное положение</th>
+            <th>Склад</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person : ${perses}">
+            <td th:text="${person.getId()}"></td>
+            <td th:text="${person.getName()}"></td>
+            <td th:text="${person.getSecondName()}"></td>
+            <td th:text="${person.getAge()}"></td>
+            <td th:text="${person.getFamily()}"></td>
+            <td th:text="${person.getLocation().getAddress()}"></td>
+            <td>
+                <form th:action="@{/UpdatePerson/{personId}(personId=${person.getId()})}" method="get">
+                    <button class="btn btn-success" type="submit">Изменить</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/deletePerson/{personId}(personId=${person.getId()})}" method="get">
+                    <button class="btn btn-danger" type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container mt-4">
+    <h2>Поля для заполнения</h2>
+    <form th:action="@{/AddPeople}" method="get">
+        <div class="mb-3">
+            <label for="name" class="form-label">Название человека</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="secondName" class="form-label">Фамилия</label>
+            <input type="text" class="form-control" id="secondName" name="secondName">
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Возраст</label>
+            <input type="number" class="form-control" id="age" name="age" required>
+        </div>
+        <div class="mb-3">
+            <label for="family" class="form-label">Семейное положение</label>
+            <input type="text" class="form-control" id="family" name="family">
+        </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Склад</label>
+            <input type="text" class="form-control" id="location" name="location">
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+
+<footer>
+    <div class="mb-3"></div>
+</footer>
+</body>
+</html>

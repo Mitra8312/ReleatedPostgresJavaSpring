@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ячейки</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/goInd}">Даосизм</a>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h2>Поля для изменения модельки</h2>
+    <form th:action="@{/updateCell}" method="post">
+        <div class="mb-3">
+            <label for="id" class="form-label">Номер ячейки</label>
+            <input type="text" class="form-control" id="id" name="id" th:value="*{id}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Название продукта</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="*{name}">
+        </div>
+        <div class="mb-3">
+            <label for="level" class="form-label">Уровень</label>
+            <input type="number" class="form-control" id="level" name="level" th:value="*{level}" required>
+        </div>
+        <div class="mb-3">
+            <label for="hash" class="form-label">Уникальный номер</label>
+            <input type="text" class="form-control" id="hash" name="hash" th:value="*{hash}">
+        </div>
+        <div class="mb-3">
+            <label for="loc" class="form-label">Склад</label>
+            <input type="text" class="form-control" id="loc" name="loc" th:value="*{loc}">
+        </div>
+        <div class="mb-3">
+            <label for="product" class="form-label">Продукт</label>
+            <input type="text" class="form-control" id="product" name="product" th:value="*{product}">
+        </div>
+        <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+</div>
+</body>
+</html>

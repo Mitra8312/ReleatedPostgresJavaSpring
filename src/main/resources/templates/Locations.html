@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Склады</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/goIn}">Даосизм</a>
+        <form class="d-flex" th:action="@{GetLocation}" method="get">
+            <input class="form-control me-2" type="search" placeholder="Поиск" name="address" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Найти</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>Склады</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Адрес</th>
+            <th>Изменить</th>
+            <th>Удалить</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="loc : ${locs}">
+            <td th:text="${loc.getId()}"></td>
+            <td th:text="${loc.getName()}"></td>
+            <td th:text="${loc.getDescription()}"></td>
+            <td th:text="${loc.getAddress()}"></td>
+            <td>
+                <form th:action="@{/UpdateLocation/{locId}(locId=${loc.getId()})}" method="get">
+                    <button class="btn btn-success" type="submit">Изменить</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/deleteLocation/{locId}(locId=${loc.getId()})}" method="get">
+                    <button class="btn btn-danger" type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="container mt-4">
+    <h2>Поля для заполнения</h2>
+    <form th:action="@{/AddLocation}" method="get">
+        <div class="mb-3">
+            <label for="name" class="form-label">Название склада</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Описание</label>
+            <input type="text" class="form-control" id="description" name="description">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Адрес</label>
+            <input type="text" class="form-control" id="address" name="address">
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+
+<footer>
+    <div class="mb-3"></div>
+</footer>
+</body>
+</html>
